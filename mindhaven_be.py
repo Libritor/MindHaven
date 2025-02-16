@@ -4,6 +4,7 @@ import tempfile
 import json
 from PyPDF2 import PdfReader
 from openai import OpenAI
+import streamlit as st
 
 # Load API key securely from Streamlit secrets
 api_key = st.secrets["mindhaven"]["api_key"]
