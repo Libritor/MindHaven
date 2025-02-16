@@ -25,8 +25,7 @@ Target Users for MindHaven 🌿
 ## 🛠️ Tech Stack
 * **Frontend:** Streamlit - for the development of interactive and user-friendly web application.
 * **Backend:** Python - leveraging its rich ecosystem of data science and AI libraries.
-* **AI/ML:** AI/ML API Models (DeepSeek R1) - an advanced reasoning model that outperforms competitors with high efficiency and open-source accessibility for developers.
-* **Database:** FAISS - for vector storage and efficient retrieval of user journal entries and mental health resources.
+* **AI/ML:** Groq API Models (DeepSeek R1) - an advanced reasoning model that outperforms competitors with high efficiency and open-source accessibility for developers.
 
 ## 🚀 Quick Start
 # Live Demo
