@@ -15,19 +15,17 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-        /* Remove ALL Streamlit chrome (header, footer, deploy btn, red bar) */
-        .stApp > header,
-        .stDeployButton,
-        .st-emotion-cache-uf99v8,          /* red loading bar container */
-        footer {visibility:hidden; height:0 !important;}
+        /* top “Built with Streamlit” decoration bar */
+        div[data-testid="stDecoration"] {display:none !important;}
+
+        /* the tiny bottom-right red Streamlit icon (optional) */
+        .st-emotion-cache-uf99v8 {visibility:hidden;}
+
+        /* close up the empty gap it used to occupy */
         .block-container {padding-top:0.5rem;}
     </style>
-
-    <!-- mobile scaling -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     """,
     unsafe_allow_html=True
-)
 # -----------------------------------------------------------------
 
 # ---- BACKEND STARTUP --------------------------------------------
