@@ -8,6 +8,23 @@ from io import BytesIO
 import random
 import mindhaven_be as backend
 
+# 1 a. remove EVERY Streamlit toolbar / padding
+st.markdown("""
+    <style>
+        /* kill the black header and "Built with Streamlit" bar */
+        .stApp > header, .stDeployButton {visibility: hidden; height: 0 !important;}
+        /* remove the blank area they used to occupy */
+        .block-container { padding-top: 0.5rem; }
+    </style>
+""", unsafe_allow_html=True)
+
+# 1 b. optional — guarantee mobile viewport
+st.write(
+    '<meta name="viewport" content="width=device-width, initial-scale=1">',
+    unsafe_allow_html=True,
+)
+
+
 
 # ---- BACKEND STARTUP: LOAD ANY SAVED CHUNKS (optional)
 backend.load_chunks_from_disk()
