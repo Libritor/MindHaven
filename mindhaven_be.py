@@ -151,7 +151,7 @@ def generate_answer(context, user_query):
 
     try:
         response = client.chat.completions.create(
-            model="qwen-2.5-32b",
+            model="deepseek-chat",
             messages=messages
         )
         if response.choices:
