@@ -1,43 +1,41 @@
 import os, datetime, random, json, re
 import streamlit as st
+import mindhaven_be as backend   # helper module
 
-import mindhaven_be as backend  # your helper module
-
-# ------------- 1. FIRST Streamlit command ------------------------
+# ─── 1. FIRST Streamlit command ──────────────────────────────────
 st.set_page_config(
     page_title="MindHaven",
     page_icon=":herb:",
-    layout="centered"          # centred looks nicer on mobile; change to "wide" if you prefer
+    layout="centered",
 )
-# -----------------------------------------------------------------
+# ─────────────────────────────────────────────────────────────────
 
-# ------------- 2. Custom CSS & Mobile Viewport -------------------
+# ─── 2. Custom CSS & Mobile Viewport ─────────────────────────────
 st.markdown(
     """
     <style>
-        /* top “Built with Streamlit” decoration bar */
+        /* remove built-with banner & Streamlit footer */
         div[data-testid="stDecoration"] {display:none !important;}
-
-        /* the tiny bottom-right red Streamlit icon (optional) */
-        .st-emotion-cache-uf99v8 {visibility:hidden;}
-
-        /* close up the empty gap it used to occupy */
+        .st-emotion-cache-uf99v8        {visibility:hidden;}
         .block-container {padding-top:0.5rem;}
     </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     """,
     unsafe_allow_html=True
-# -----------------------------------------------------------------
+)  # ← MISSING PARENTHESIS ADDED HERE
+# ─────────────────────────────────────────────────────────────────
 
-# ---- BACKEND STARTUP --------------------------------------------
+# ---- BACKEND STARTUP -------------------------------------------
 backend.load_chunks_from_disk()
-# -----------------------------------------------------------------
+# ----------------------------------------------------------------
 
-# -------------------  MAIN UI  -----------------------------------
+# ---------------------  MAIN UI  --------------------------------
 st.title("🧘 MindHaven")
 st.write("AI-Powered Mental Health Companion")
 st.write("Talk to an empathetic AI for emotional support and well-being tips.")
 
-# ── Sidebar: Mood tracker & journal ──────────────────────────────
+# Sidebar – Mood tracker & journal
 st.sidebar.header("📖 Mood Tracker & Journal")
 mood = st.sidebar.selectbox("How do you feel today?",
                             ["Happy", "Stressed", "Anxious", "Sad"])
@@ -49,7 +47,7 @@ if st.sidebar.button("Save Journal Entry"):
         f.write(f"{date} – Mood: {mood}\n{journal_entry}\n\n")
     st.sidebar.success("Entry saved ✅")
 
-# View saved entries
+# Show past entries
 st.sidebar.header("📜 Past Journal Entries")
 if os.path.exists("journal.txt"):
     with open("journal.txt", "r", encoding="utf-8") as f:
@@ -57,7 +55,7 @@ if os.path.exists("journal.txt"):
 else:
     st.sidebar.write("No journal entries yet.")
 
-# ── File upload ──────────────────────────────────────────────────
+# File upload
 st.header("📂 Upload Mental-Health Documents")
 files = st.file_uploader("Upload PDFs or text files",
                          type=["txt", "pdf", "docx"],
@@ -65,7 +63,7 @@ files = st.file_uploader("Upload PDFs or text files",
 if files and st.button("Process Upload"):
     st.success(backend.process_files(files))
 
-# ── AI chat ──────────────────────────────────────────────────────
+# AI chat
 st.header("💬 AI Support Chat")
 user_input = st.text_area("How are you feeling?")
 
@@ -76,12 +74,12 @@ if st.button("Get AI Support"):
     else:
         st.warning("Please enter a message first.")
 
-# ── Guided meditation ────────────────────────────────────────────
+# Guided meditation
 st.header(":herb: Guided Meditation & Relaxation")
 if st.button("Start 5-Minute Meditation"):
     st.video("https://www.youtube.com/watch?v=inpok4MKVLM")
 
-# ── Daily tip ────────────────────────────────────────────────────
+# Daily tip
 st.sidebar.header("🌟 Daily Wellness Tip")
 st.sidebar.write(random.choice([
     "Take a 10-minute walk outside to clear your mind.",
@@ -89,4 +87,4 @@ st.sidebar.write(random.choice([
     "Write down three things you're grateful for today.",
     "Drink plenty of water and stay hydrated!"
 ]))
-# -----------------------------------------------------------------
+# ----------------------------------------------------------------
